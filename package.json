@@ -1,0 +1,67 @@
+{
+  "name": "vue-container-query-2",
+  "version": "0.1.0",
+  "description": "Vue plugin for working with css container query",
+  "main": "dist/cq.umd.js",
+  "module": "dist/cq.esm.js",
+  "unpkg": "dist/cq.iife.js",
+  "jsdelivr": "dist/cq.iife.js",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production bili --config ./bili.config.js",
+    "build:watch": "NODE_ENV=development bili --watch --config ./bili.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Mehdi-Hp/vue-container-query-2.git"
+  },
+  "keywords": [
+    "vue",
+    "container",
+    "query",
+    "responsive",
+    "element",
+    "query"
+  ],
+  "author": "Mehdi Hoseini (mhhhhp@proton.me)",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Mehdi-Hp/vue-container-query-2/issues"
+  },
+  "homepage": "https://github.com/Mehdi-Hp/vue-container-query-2#readme",
+  "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.6.0",
+    "@vue/cli-plugin-babel": "^4.0.5",
+    "@vue/cli-plugin-eslint": "^4.0.5",
+    "@vue/cli-service": "^4.0.5",
+    "@vue/eslint-config-airbnb": "^4.0.1",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "bili": "^4.8.1",
+    "bili-babel": "^0.2.0",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.20.0",
+    "eslint-plugin-vue": "^5.2.3",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.4.2",
+    "resize-observer-polyfill": "^1.5.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-strip": "^1.2.2",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.x"
+  },
+  "dependencies": {
+    "deepmerge": "^4.2.1"
+  }
+}
