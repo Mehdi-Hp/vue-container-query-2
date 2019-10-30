@@ -94,9 +94,11 @@ This is default options:
             medium: 'medium',
             large: 'large',
             xlarge: 'xlarge'
-        },
-        useBEM: true
-    }
+        }
+    },
+    useBEM: true,
+    utilityClassNamesRegex: /(?:)/,
+    ignoredClasses: []
 }
 ```
 
@@ -111,9 +113,10 @@ Vue.use(VueContainerQuery, {
       medium: 'size:medium',
       large: 'size:large',
       xlarge: 'size:xlarge'
-    },
-    useBEM: true
-  }
+    }
+  },
+  useBEM: true,
+  utilityClassNamesRegex: /u-/g,
 });
 ```
 
@@ -122,6 +125,14 @@ Vue.use(VueContainerQuery, {
 ### `useBEM`
 
 If this set as `true`, the classes will respect the BEM convention. say your element has `search` class. then when small condition is on, a `search--small` class adds to element. VCQ is smart enough to ignore `--` classes when generating new class names. but if your element has multiple classes like `search` `header`, you will get both `search--small` and `header--small`. so if you are using `useBEM` make sure you implement the true BEM. otherwise this plugin won't work that nice.
+
+### `utilityClassNamesRegex`
+
+You can set a regex to ignore any sort of utility class that you don't want to consider as semantic class.
+
+### ignoredClasses
+
+You can set an array to ignore any sort of class that you don't want to consider as semantic class.
 
 ## Directive
 
@@ -144,6 +155,6 @@ See there? no `:class` and checking for `$cq.small` or something. size classes w
 
 ## 👨‍💻 ToDo
 
-- [ ] Implement pixel mode. this will add the exact size of component in pixels as class, so you won't need `small`, `medium`, etc. class names.
-- [ ] Detect utility classes to prevent adding "size classes" to them.
-- [ ] Add option to explicitly mention main class name. It's very useful if you're using utility first CSS classes.
+- [ ] Add unit tests.
+- [x] Detect utility classes to prevent adding "size classes" to them.
+- [x] Add option to explicitly mention main class name. It's very useful if you're using utility first CSS classes.

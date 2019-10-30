@@ -1,7 +1,6 @@
 import ResizeObserver from 'resize-observer-polyfill';
-import {
-    optionsUtils, recalculateClassList
-} from './_helpers';
+import ClassCalculator from './classCalculator/index';
+import { optionsUtils } from './_helpers';
 
 const goodToGo = (context) => {
     return context.$options.cq && !!Object.keys(context.$options.cq).length;
@@ -25,8 +24,11 @@ const defaultOptions = {
             large: 'large',
             xlarge: 'xlarge'
         },
-        useBEM: true
-    }
+        prepend: ''
+    },
+    useBEM: true,
+    utilityClassNamesRegex: /(?:)/,
+    ignoredClasses: ['u-hidden']
 };
 
 export default {
@@ -44,8 +46,9 @@ export default {
             directives: {
                 cq: {
                     bind($el, { modifiers }, vnode) {
+                        const classCalculator = new ClassCalculator(vnode.context, $el, normalizedOptions);
                         vnode.context.$on('$cq:resize', (contentRect) => {
-                            recalculateClassList($el, vnode.context, normalizedOptions);
+                            classCalculator.setNewClasses();
                         });
                     },
                     unbind($el, { modifiers }, vnode) {
