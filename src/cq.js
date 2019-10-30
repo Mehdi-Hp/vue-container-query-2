@@ -28,7 +28,7 @@ const defaultOptions = {
     },
     useBEM: true,
     utilityClassNamesRegex: /(?:)/,
-    ignoredClasses: ['u-hidden']
+    ignoredClasses: ['']
 };
 
 export default {

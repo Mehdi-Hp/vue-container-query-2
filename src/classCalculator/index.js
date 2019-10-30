@@ -1,5 +1,5 @@
 import sanitizer from './sanitizer';
-import cqMapper from './cqMapper';
+import cqHelper from './cq';
 
 class ClassCalculator {
     #appliedCqClasses = []
@@ -23,7 +23,7 @@ class ClassCalculator {
     }
 
     figureOutNewClasses() {
-        return cqMapper.getCqClassNames(this.context.$cq, this.$el, this.readSemanticClasses(), this.options);
+        return cqHelper.getCqClassNames(this.context.$cq, this.$el, this.readSemanticClasses(), this.options);
     }
 
     removeOldClasses() {
