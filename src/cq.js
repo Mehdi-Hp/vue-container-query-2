@@ -27,7 +27,7 @@ const defaultOptions = {
         prepend: ''
     },
     useBEM: true,
-    utilityClassNamesRegex: /(?:)/,
+    utilityClassNamesRegex: /$^/,
     ignoredClasses: ['']
 };
 
