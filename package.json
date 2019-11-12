@@ -1,6 +1,6 @@
 {
   "name": "vue-container-query-2",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Vue plugin for working with css container query",
   "main": "dist/cq.umd.js",
   "module": "dist/cq.esm.js",
@@ -62,7 +62,7 @@
     "vue": "^2.6.x"
   },
   "dependencies": {
-    "resize-observer-polyfill": "^1.5.1",
-    "deepmerge": "^4.2.1"
+    "deepmerge": "^4.2.1",
+    "resize-observer-polyfill": "^1.5.1"
   }
 }
