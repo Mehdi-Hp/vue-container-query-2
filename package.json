@@ -1,6 +1,6 @@
 {
   "name": "vue-container-query-2",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Vue plugin for working with css container query",
   "main": "dist/cq.umd.js",
   "module": "dist/cq.esm.js",
