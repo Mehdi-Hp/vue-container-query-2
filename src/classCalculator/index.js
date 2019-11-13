@@ -4,22 +4,19 @@ import cqHelper from './cq';
 class ClassCalculator {
     #appliedCqClasses = []
 
-    constructor(context, $el, options) {
+    constructor(context, staticClasses, $el, options) {
         this.context = context;
         this.options = options;
         this.$el = $el;
+        this.staticClasses = staticClasses.split(' ');
     }
 
     readSemanticClasses() {
-        return sanitizer.getSemanticClasses(this.$el.classList, {
+        return sanitizer.getSemanticClasses(this.staticClasses, {
             BEM: this.options.useBEM,
             utilityRegex: this.options.utilityClassNamesRegex,
             specialOnes: this.options.ignoredClasses
         });
-    }
-
-    getAppliedCqClasses() {
-        return sanitizer.getAppliedCqClasses(this.$el.classList);
     }
 
     figureOutNewClasses() {
