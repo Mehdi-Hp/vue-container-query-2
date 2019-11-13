@@ -40,10 +40,10 @@ export default {
             directives: {
                 cq: {
                     bind($el, { modifiers }, vnode) {
-                        const classCalculator = new ClassCalculator(vnode.context, $el, normalizedOptions);
+                        const classCalculator = new ClassCalculator(vnode.context, vnode.data.staticClass, $el, normalizedOptions);
                         vnode.context.$on('$cq:resize', (contentRect) => {
-                            // TODO: I have vnode.data.staticClass
                             classCalculator.setNewClasses();
+                            vnode.context.$forceUpdate();
                         });
                     },
                     unbind($el, { modifiers }, vnode) {
