@@ -1,5 +1,6 @@
 const cssMediaQueryResolver = {
     maxWidth(desired, actual) {
+        console.log({ desired, actual });
         return actual <= desired;
     },
     minWidth(desired, actual) {

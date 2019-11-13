@@ -33,12 +33,6 @@ const defaultOptions = {
 
 export default {
     install(Vue, options) {
-        const $cq = Vue.observable({
-            contentRect: {},
-            breakpoints: {},
-            resizeObserver: null
-        });
-
         optionsUtils.validate(options, defaultOptions);
         const normalizedOptions = optionsUtils.normalize(options, defaultOptions);
 
@@ -48,6 +42,7 @@ export default {
                     bind($el, { modifiers }, vnode) {
                         const classCalculator = new ClassCalculator(vnode.context, $el, normalizedOptions);
                         vnode.context.$on('$cq:resize', (contentRect) => {
+                            // TODO: I have vnode.data.staticClass
                             classCalculator.setNewClasses();
                         });
                     },
@@ -62,43 +57,53 @@ export default {
             computed: {
                 $cq() {
                     if (goodToGo(this)) {
-                        return $cq;
+                        return this._cq;
                     }
                     return null;
                 }
             },
+            beforeCreate() {
+                if (goodToGo(this)) {
+                    this._cq = Vue.observable({
+                        contentRect: {},
+                        breakpoints: {},
+                        resizeObserver: null
+                    });
+                }
+            },
             created() {
                 if (goodToGo(this)) {
-                    this.$set($cq, 'breakpoints', this.$options.cq);
+                    this.$set(this._cq, 'breakpoints', this.$options.cq);
                 }
             },
             mounted() {
                 if (goodToGo(this)) {
-                    Object.keys($cq.breakpoints).forEach((breakpoint) => {
-                        $cq[breakpoint] = false;
+                    Object.keys(this._cq.breakpoints).forEach((breakpoint) => {
+                        this._cq[breakpoint] = false;
                     });
 
-                    $cq.resizeObserver = new ResizeObserver((entries) => {
+                    this._cq.resizeObserver = new ResizeObserver((entries) => {
+                        console.log({ entries });
                         entries.forEach((entry) => {
-                            this.$set($cq, 'contentRect', entry.contentRect.toJSON());
-                            Object.keys($cq.breakpoints).forEach((breakpoint) => {
-                                const rules = $cq.breakpoints[breakpoint];
+                            this.$set(this._cq, 'contentRect', entry.contentRect.toJSON());
+                            Object.keys(this._cq.breakpoints).forEach((breakpoint) => {
+                                const rules = this._cq.breakpoints[breakpoint];
                                 Object.entries(rules).forEach((rule) => {
                                     const cssMqRule = rule[0];
                                     const cssMqValue = rule[1];
                                     const fieldToTest = (cssMqRule.toLowerCase().includes('width')) ? 'width' : 'height';
-                                    this.$set($cq, breakpoint, cssMediaQueryResolver[cssMqRule](cssMqValue, $cq.contentRect[fieldToTest]));
-                                    this.$emit('$cq:resize', $cq.contentRect);
+                                    this.$set(this._cq, breakpoint, cssMediaQueryResolver[cssMqRule](cssMqValue, this._cq.contentRect[fieldToTest]));
+                                    this.$emit('$cq:resize', this._cq.contentRect);
                                 });
                             });
                         });
                     });
-                    $cq.resizeObserver.observe(this.$el);
+                    this._cq.resizeObserver.observe(this.$el);
                 }
             },
             destroyed() {
                 if (goodToGo(this)) {
-                    $cq.resizeObserver.disconnect();
+                    this._cq.resizeObserver.disconnect();
                 }
             }
         });
