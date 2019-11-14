@@ -1,8 +1,12 @@
 # Vue Container Query 2
 
+🧐 Because `vue-container-query` was taken, and API is a little like `vue-container-query` package. So, thank you the maintainer.
+
 Vue plugin for working with css container query as easy as possible.
 
-💥 **This is the beta version. it's safe for production, but keep an eye on documentations if you upgrade the package. There probably will be breaking changes after first major release**
+💥 **This is the beta version. It's safe for production, but keep an eye on documentations if you wanted to upgrade the package. There probably will be breaking changes in first major release**
+
+---
 
 ## Installation
 
@@ -13,6 +17,8 @@ yarn add vue-container-query-2
 ```
 
 This is also available on [jsdeliver](https://www.jsdelivr.com/) and [unpkg](https://unpkg.com/).
+
+---
 
 ## Usage
 
@@ -39,9 +45,13 @@ export default {
   ...
 ```
 
-:warning: for `maxWidth` you get `<=`, but for `minWidth` it's `>` and no `=`. So the behavior is not quite like CSS Media Queries and it's a little well formatted. **But it may change during next major release. so, heads up.**
+---
 
-After defining breakpoints, you'll have reactive `$cq` variable in your component. you can use this anyhow you need.
+:warning: for `maxWidth` you get `<=`, but for `minWidth` it's `>` and no `=`. So the behavior is not quite like CSS Media Queries. Although it's a little bit more well formatted. **But it may change during next major release. so, heads up.**
+
+---
+
+After defining breakpoints, you'll have reactive `$cq` variable in your component. You can use this anyhow you need. Maybe dynamic classes, maybe show/hide other element or components, whatever.
 
 ```vue
 <div
@@ -55,7 +65,7 @@ After defining breakpoints, you'll have reactive `$cq` variable in your componen
 </div>
 ```
 
-This is a sample of how `$eq` object looks like:
+This is a sample of how `$eq` object looks like in the instance's context:
 
 ```javascript
 {
@@ -81,6 +91,8 @@ This is a sample of how `$eq` object looks like:
 }
 ```
 
+---
+
 ## Options
 
 This is default options:
@@ -94,15 +106,16 @@ This is default options:
             medium: 'medium',
             large: 'large',
             xlarge: 'xlarge'
-        }
+        },
+        prepend: ''
     },
     useBEM: true,
-    utilityClassNamesRegex: /(?:)/,
-    ignoredClasses: []
+    utilityClassNamesRegex: /$^/,
+    ignoredClasses: ['']
 }
 ```
 
-you can override these when registering the plugin
+You can override these when registering the plugin:
 
 ```javascript
 Vue.use(VueContainerQuery, {
@@ -120,11 +133,11 @@ Vue.use(VueContainerQuery, {
 });
 ```
 
-☝ _`classNames` and `useBEM` only works if you are using `v-cq` directive._
+☝ _All options are only useful when you are using `v-cq` directive. the core works fine without any provided option_
 
 ### `useBEM`
 
-If this set as `true`, the classes will respect the BEM convention. say your element has `search` class. then when small condition is on, a `search--small` class adds to element. VCQ is smart enough to ignore `--` classes when generating new class names. but if your element has multiple classes like `search` `header`, you will get both `search--small` and `header--small`. so if you are using `useBEM` make sure you implement the true BEM. otherwise this plugin won't work that nice.
+If this set as `true`, the classes will respect the BEM convention. Say your element has `search` class, then when small condition is on, a `search--small` class adds to element. VCQ is smart enough to ignore `--` classes when generating new class names. But if your element has multiple classes like `search` `header`, you will get both `search--small` and `header--small`. so if you are using `useBEM` make sure you implement the true BEM. otherwise this plugin won't work that nice.
 
 ### `utilityClassNamesRegex`
 
@@ -133,6 +146,8 @@ You can set a regex to ignore any sort of utility class that you don't want to c
 ### ignoredClasses
 
 You can set an array to ignore any sort of class that you don't want to consider as semantic class.
+
+---
 
 ## Directive
 
@@ -151,7 +166,9 @@ This may be the best feature of thin package. There also is a handy `v-cq` direc
 <!-- <div class="card card--large"><div> -->
 ```
 
-See there? no `:class` and checking for `$cq.small` or something. size classes will automatically calculate and get attached to element. remember that size classes are based on what you did set in options, if not, default ones as fallback.
+See there? no `:class` and checking for `$cq.small` or anything. size classes will automatically get calculated and attached to element. remember that size classes are based on what you did set in options, if not, default ones as fallback.
+
+---
 
 ## 👨‍💻 ToDo
 
