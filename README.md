@@ -1,10 +1,10 @@
 # Vue Container Query 2
 
-🧐 Because `vue-container-query` was taken, and API is a little like `vue-container-query` package. So, thank you the maintainer.
+🧐 Because `vue-container-query` was already taken, and the API is slightly similar to `vue-container-query` package. So, thank you the maintainer.
 
 Vue plugin for working with css container query as easy as possible.
 
-💥 **This is the beta version. It's safe for production, but keep an eye on documentations if you wanted to upgrade the package. There probably will be breaking changes in first major release**
+💥 **This is the beta version. It's safe for production, but keep an eye on the documentations if you want to upgrade the package. There probably will be breaking changes in the first major release**
 
 ---
 
@@ -51,21 +51,21 @@ export default {
 
 ---
 
-After defining breakpoints, you'll have reactive `$cq` variable in your component. You can use this anyhow you need. Maybe dynamic classes, maybe show/hide other element or components, whatever.
+After defining the breakpoints, you'll have reactive `$cq` variable in your component. You can use this anyhow you need. Maybe dynamic classes, maybe show/hide other element or components, whatever.
 
 ```vue
 <div
     :class="{
-        'search--small': $eq.small
+        'search--small': $cq.small
     }
 >
-    <span v-if="$eq.large">
-        Yo. I only get rendered if the componenet is 900px or wider
+    <span v-if="$cq.large">
+        Yo. I only get rendered if the component is 900px or wider
     </span>
 </div>
 ```
 
-This is a sample of how `$eq` object looks like in the instance's context:
+This is a sample of how `$cq` object looks like in the instance's context:
 
 ```javascript
 {
@@ -95,7 +95,7 @@ This is a sample of how `$eq` object looks like in the instance's context:
 
 ## Options
 
-This is default options:
+This is the default options:
 
 ```javascript
 {
@@ -137,21 +137,21 @@ Vue.use(VueContainerQuery, {
 
 ### `useBEM`
 
-If this set as `true`, the classes will respect the BEM convention. Say your element has `search` class, then when small condition is on, a `search--small` class adds to element. VCQ is smart enough to ignore `--` classes when generating new class names. But if your element has multiple classes like `search` `header`, you will get both `search--small` and `header--small`. so if you are using `useBEM` make sure you implement the true BEM. otherwise this plugin won't work that nice.
+If set `true`, the classes will respect the BEM convention. Say your element has a `search` class, then when small condition is on a `search--small` class will be added to the element. VCQ is smart enough to ignore `--` classes when generating new class names. But if your element has multiple classes like `search` `header`, you will get both `search--small` and `header--small`. So if you are using `useBEM`, make sure you implement a valid BEM structure. Otherwise this plugin won't work as intended.
 
 ### `utilityClassNamesRegex`
 
-You can set a regex to ignore any sort of utility class that you don't want to consider as semantic class.
+You can set a regex to ignore any sort of utility class that you don't want to consider as semantic.
 
 ### ignoredClasses
 
-You can set an array to ignore any sort of class that you don't want to consider as semantic class.
+You can set an array to ignore any sort of class that you don't want to consider as semantic.
 
 ---
 
 ## Directive
 
-This may be the best feature of thin package. There also is a handy `v-cq` directive available to automate the process of setting size classes. so, all you need to make the element to get size classes is like below:
+This may be the best feature of this package: a super handy `v-cq` directive available to automate the process of setting size classes. So, all you need to do in order to make an element get size classes is like as follows:
 
 ```vue
 <div
@@ -166,7 +166,7 @@ This may be the best feature of thin package. There also is a handy `v-cq` direc
 <!-- <div class="card card--large"><div> -->
 ```
 
-See there? no `:class` and checking for `$cq.small` or anything. size classes will automatically get calculated and attached to element. remember that size classes are based on what you did set in options, if not, default ones as fallback.
+See there? No `:class` and checking for `$cq.small` or anything. Size classes will automatically get generated and attached to element. Remember that size classes are based on what you set in options. If not set, default ones are applied as fallback.
 
 ---
 
